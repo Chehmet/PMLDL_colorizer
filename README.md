@@ -20,5 +20,8 @@ We are using the [Public Flickr Photos License 1 Dataset](https://huggingface.co
 - Build a robust colorization model.
 - Optionally, integrate photo restoration features if time permits.
 
+## Work distribution
+1. Anastasia - API
+2. Saveliy and Chulpan - model building and evaluation
 ## License
 This project uses Hugging Face's [licence](https://spdx.org/licenses/CC-BY-NC-SA-3.0).
