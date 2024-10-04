@@ -1,8 +1,8 @@
 # Black & White Photo Colorization and Restoration
 
 ## Team Members
-- **Anastasia Pichugina**
 - **Chulpan Valiullina**
+- **Anastasia Pichugina**
 - **Saveliy Khlebnov**
 
 ## Project Overview
