@@ -1,0 +1,33 @@
+from functools import cache
+from nis import cat
+import urllib.request
+import cv2
+import numpy as np
+import polars as pl
+import requests
+
+
+@cache
+def check_url(url: str) -> bool:
+    response = requests.get(url)
+    print(f"checking {url}")
+    return response.status_code == 200
+
+
+def get_image(url):
+
+    req = urllib.request.urlopen(url)
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    img = cv2.imdecode(arr, -1)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img
+
+
+def get_urls() -> pl.DataFrame:
+    urls = pl.read_parquet(
+        "hf://datasets/Chr0my/public_flickr_photos_license_1/**/*.parquet",
+        columns=["url"],
+    )
+
+    # urls = urls.select(pl.col("url"))
+    return urls

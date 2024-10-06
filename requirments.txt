@@ -1,0 +1,7 @@
+torch
+flask
+polars
+opencv-python
+scikit-learn
+tqdm
+requests
