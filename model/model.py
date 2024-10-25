@@ -41,8 +41,9 @@ class PictureColorizer(torch.nn.Module):
         x = self.conv6(x)
         x = torch.nn.functional.relu(x)
         x = self.norm(x)
-        x = x+ torch.min(x)
+        x = x - torch.min(x)
         x = x/torch.max(x)
+        
         return x
 
 
