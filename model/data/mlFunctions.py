@@ -4,6 +4,7 @@ from data.transforms import transform
 from data.functions import get_image
 from tqdm import tqdm
 import torch
+import gc
 
 
 def train_one_epoch(model, loader, optimizer, loss_fn, epoch_num=-1):
@@ -30,6 +31,10 @@ def train_one_epoch(model, loader, optimizer, loss_fn, epoch_num=-1):
 
         # optimizer run
         optimizer.step()
+
+        
+        if i % 10 == 0:
+            gc.collect()
 
         loop.set_postfix({"loss": float(loss)})
 
@@ -64,6 +69,9 @@ def val_one_epoch(
             loss = loss_fn(outputs, colored)
 
             loop.set_postfix({"mse": float(loss)})
+
+            if i % 10 == 0:
+                gc.collect()
 
         if loss < best:
             torch.save(model.state_dict(), ckpt_path)
