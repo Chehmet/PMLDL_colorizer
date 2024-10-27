@@ -1,5 +1,5 @@
 from functools import lru_cache
-from data.functions import get_image, get_urls
+from model.data.functions import get_image, get_urls
 import cv2
 import numpy as np
 

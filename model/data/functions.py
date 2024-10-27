@@ -1,5 +1,5 @@
 from functools import lru_cache
-from nis import cat
+# from nis import cat
 import urllib.request
 import cv2
 import numpy as np

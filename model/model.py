@@ -1,4 +1,4 @@
-from data.transforms import transform
+from model.data.transforms import transform
 import torch
 from torchvision.transforms import Normalize
 
