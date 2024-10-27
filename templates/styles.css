@@ -1,0 +1,27 @@
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #4CAF50;
+    font-family: Arial, sans-serif;
+}
+
+#output_image {
+    margin-top: 20px;
+    border: 2px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

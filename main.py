@@ -1,50 +1,36 @@
 import os
-from flask import Flask, request, render_template, redirect, url_for
-from werkzeug.utils import secure_filename
-
-app = Flask(__name__)
+import streamlit as st
+from PIL import Image
 
 UPLOAD_FOLDER = "uploads/"
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+with open("templates/styles.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+def display_upload_and_colorize_page():
+    st.markdown(open("templates/upload.html").read(), unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
+    
+    if uploaded_file:
+        file_path = os.path.join(UPLOAD_FOLDER, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        
+        st.success("Image uploaded successfully!")
+        image = Image.open(file_path)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image(image, caption="Uploaded Image", use_column_width=True)
+        
+        with col2:
+            placeholder = st.empty()
+            placeholder.image("https://via.placeholder.com/200", caption="Colorized Image", use_column_width=True)
 
-def allowed_file(filename):
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+            if st.button("Colorize"):
+                colorized_image = image
+                placeholder.image(colorized_image, caption="Colorized Image", use_column_width=True)
 
-
-@app.route("/")
-def upload_form():
-    return render_template("upload.html")
-
-
-@app.route("/upload", methods=["POST"])
-def upload_file():
-    if "file" not in request.files:
-        return redirect(request.url)
-
-    file = request.files["file"]
-
-    if file.filename == "":
-        return redirect(request.url)
-
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        file.save(filepath)
-        return redirect(url_for("uploaded_file", filename=filename))
-
-    return redirect(request.url)
-
-
-@app.route("/uploads/<filename>")
-def uploaded_file(filename):
-    return render_template("display_image.html", filename=filename)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+display_upload_and_colorize_page()
