@@ -7,6 +7,8 @@
 
 ## Project Overview
 This project aims to develop a custom model for colorizing black and white photos.
+## Progress for now
+![Progeress for now](uploads/example.jpg)
 ## Dataset
 We are using the [Public Flickr Photos License 1 Dataset](https://huggingface.co/datasets/Chr0my/public_flickr_photos_license_1) from Hugging Face, which contains **120 million colorful images**. These images will be processed to create grayscale versions for training purposes.
 
