@@ -1,4 +1,4 @@
-from data.transforms import transform
+from model.data.transforms import transform
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
