@@ -1,0 +1,8 @@
+{
+    "epochs": 60,
+    "batch_size": 4,
+    "pic_size": 1024,
+    "pictures_num": 2000,
+    "train_val_split": 0.1,
+    "model": "cnn"
+}

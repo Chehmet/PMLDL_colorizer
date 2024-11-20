@@ -1,18 +1,17 @@
-from turtle import color
 from data.functions import get_urls, get_image
-from data.transforms import transform
+from data.transforms import rgb_to_gray
 import torch
-from model import PictureColorizer
+from model import CNN
 from matplotlib import pyplot as plt
 
-model = PictureColorizer()
+model = CNN()
 model.load_state_dict(torch.load("./models/best.pt", weights_only=True))
 model.eval()
 
 url = get_urls()[0]["url"]
 
 image = get_image(url[0])
-gray = torch.Tensor(transform(image))
+gray = torch.Tensor(rgb_to_gray(image))
 gray = gray.transpose(0, 2)
 gray = gray.transpose(1, 2)
 colored = model(gray)
