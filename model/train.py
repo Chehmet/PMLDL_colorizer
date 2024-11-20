@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
         train(train_dataloader, val_dataloader, 
               model, optimizer, loss_fn, 
-              model_name=model_name, epochs=epochs, ckpt_path=ckpt_path, plots_path=plots_path, device=device, plot_freq=2)
+              model_name=model_name, epochs=epochs, ckpt_path=ckpt_path, plots_path=plots_path, device=device, save_freq=2)
 
     else:
         model_discriminator = Discriminator(in_channels=3).to(device)
