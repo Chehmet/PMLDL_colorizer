@@ -20,6 +20,8 @@ def train_one_epoch(
 
     loop = tqdm(enumerate(loader), total=len(loader), desc=f"Epoch {epoch_num}: train", leave=True)
     model_generator.train()
+    if model_discriminator is not None:
+        model_discriminator.train()
 
     generative_loss_sum = 0.0
     discriminative_loss_sum = 0.0
@@ -97,7 +99,8 @@ def val_one_epoch(
 
     with torch.no_grad():
         model_generator.eval()
-        model_discriminator.eval()
+        if model_discriminator is not None:
+            model_discriminator.eval()
         
         
         # save 1 picture each batch
