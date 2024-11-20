@@ -25,7 +25,8 @@ We are using the [Public Flickr Photos License 1 Dataset](https://huggingface.co
 - Optionally, integrate photo restoration features if time permits.
 
 ## Work distribution
-1. Saveliy and Chulpan - model building and evaluation
-2. Anastasia - API
+1. Saveliy - model building
+2. Chulpan - model evaluation, frontend, backend
+3. Anastasia - model building and evaluation
 ## License
 This project uses Hugging Face's [licence](https://spdx.org/licenses/CC-BY-NC-SA-3.0).
