@@ -1,43 +1,74 @@
 from torch.utils.data import Dataset
-from data.functions import get_image, check_url
-import polars as pl
-from data.transforms import transform
-from torch import Tensor, max
-from tqdm import tqdm
+from data.transforms import rgb_to_gray, rgb_to_lab
+from torch import max
 from torchvision import transforms
+import cv2
+import os
+import sys
+import numpy as np
+from PIL import Image
+
+# set project root to sys paths
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(project_root)
+
+from config.path_config import get_root_path
 
 
 class PictureDataset(Dataset):
-    def __init__(self, urls):
-        checked = []
-        for url in tqdm(urls["url"]):
-            checked.append(check_url(url))
+    def __init__(self, path=None, image_size=512, mode='train', convert_to='gray', amount=2000):
 
-        urls = urls.filter(checked)
-        self.urls = urls
+        # set the dataset's length
+        amount = int(amount)
+        self.n = amount
 
+        # assign paths to each image from pictures/train or pictures/val folder
+        if not path:
+            path = get_root_path() + '/pictures'
+            self.paths = [os.path.join(path, mode, img) for img in os.listdir(os.path.join(path, mode))]
+            self.paths = self.paths[:amount]
+
+        # add transform: PIL, Resize, and ToTensor
         self.resize_transform = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize((256,256)),
+            transforms.Resize((image_size,image_size)),
             transforms.ToTensor(),
         ])
+        self.resize = transforms.Resize((image_size, image_size))
+
+        # convertation depends on model type (to Gray if CNN, to LAB if GAN)
+        self.convert_to = convert_to
 
     def __len__(self):
-        return len(self.urls)
+        return int(self.n)
 
     def __getitem__(self, idx):
+        img_path = self.paths[idx]
+        image = cv2.imread(img_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-        image = get_image(self.urls["url"][idx])
+        if self.convert_to == 'gray':
+            # convert to gray, apply transformation, normalize
+            # return gray image and original image 
+            gray = rgb_to_gray(image)
+            image, gray = self.resize_transform(image), self.resize_transform(gray)
+            image = image/max(image)
+            gray = gray/max(gray)
+            return gray, image
 
-        gray = transform(image)
-        image, gray = self.resize_transform(image), self.resize_transform(gray)
-
-        # gray = gray.transpose(0, 2)
-        # gray = gray.transpose(1, 2)
-        # image = image.transpose(0, 2)
-        # image = image.transpose(1, 2)
-
-        image = image/max(image)
-        gray = gray/max(gray)
-
-        return image, gray
+        elif self.convert_to == 'lab':
+            # resize, convert to lab, to tensor, split to L and ab
+            # return L (brightness channel) and ab (chroma information)
+            image = Image.fromarray(image) 
+            image = self.resize(image)
+            image = np.array(image)
+            lab = rgb_to_lab(image).astype("float32")
+            lab = transforms.ToTensor()(lab)
+            L = lab[[0], ...] / 50. - 1.
+            ab = lab[[1, 2], ...] / 110.
+            return L, ab
+        
+        else:
+            # other types are not supportable
+            raise Exception("Error occured. Cannot recognize convert type.")
+        
