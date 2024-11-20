@@ -71,7 +71,7 @@ def plot_loss(losses_train_gen: list, losses_val_gen: list,
     
     plt.figure(figsize=(10, 5))
     plt.plot(losses_train_gen, label='Training generative loss')
-    plt.plot(losses_val_gen, label='Validation loss')
+    plt.plot(losses_val_gen, label='Validation generative loss')
     if len(losses_train_disc) != 0:
         plt.plot(losses_train_disc, label='Training discriminative loss')
         plt.plot(losses_val_disc, label='Validation discriminative loss')
