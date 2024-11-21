@@ -6,27 +6,45 @@
 - **Saveliy Khlebnov**
 
 ## Project Overview
-This project aims to develop a custom model for colorizing black and white photos.
-## Progress for now
-### Epoch 42, the best result:
-![](plots/cnn/epoch42.png)
-![Progeress for now](uploads/example.jpg)
+This project focuses on building a robust model for colorizing black and white photos.
+
+# Project Directory Structure
+
+```plaintext
+project_root/
+├── .vscode/              # IDE-specific settings
+├── config/               # Configuration files
+├── model/                # Model training
+│   ├── data/             # Functions for dataset preprocessing and evaluation
+│   └── training/         # Scripts for training different model types
+├── models/               # Best model weights
+│   ├── cnn/              # Best CNN weights 
+│   └── gan/              # Best GAN weights 
+├── plots/                # Training result visualizations
+│   ├── cnn/              # CNN result images
+│   └── gan/              # GAN result images
+├── templates/            # Files for the web interface
+├── uploads/              # Images for testing
+├── GAN_demo.ipynb        # Gan demo
+├── README.md             
+└── .gitattributes        
+```
+
+
+## Current Progress
+- We achieved notable results using a GAN-based approach, with the best model from epoch 22:
+![Best GAN Result](plots/gan/visual_progress_epoch_22.png)
+
+## Webpage
+![Progress Example](uploads/example.jpg)
+
 ## Dataset
-We are using the [Public Flickr Photos License 1 Dataset](https://huggingface.co/datasets/Chr0my/public_flickr_photos_license_1) from Hugging Face, which contains **120 million colorful images**. These images will be processed to create grayscale versions for training purposes.
+We are utilizing the [Public Flickr Photos License 1 Dataset](https://huggingface.co/datasets/Chr0my/public_flickr_photos_license_1), containing **120 million colorful images**. These images are preprocessed into grayscale for training.
 
-## Steps
-1. **Data Preprocessing**: Convert the colorful images to grayscale to simulate black and white photos.
-2. **Model Training**: Train a custom model to colorize grayscale images using the processed dataset.
-3. **Model Evaluation**: Test Apply the trained model to colorize black and white photos.
-4. **Enhancement** (Optional): If time allows, we will expand the model to include photo restoration features (e.g., handling faded or damaged photos).
+## Work Distribution
+- **Saveliy**: Model development and experimentation.
+- **Chulpan**: Model evaluation, backend/frontend development.
+- **Anastasia**: Model training, evaluation, and documentation.
 
-## Goals
-- Build a robust colorization model.
-- Optionally, integrate photo restoration features if time permits.
-
-## Work distribution
-1. Saveliy - model building
-2. Chulpan - model evaluation, frontend, backend
-3. Anastasia - model building and evaluation
 ## License
-This project uses Hugging Face's [licence](https://spdx.org/licenses/CC-BY-NC-SA-3.0).
+The project is developed using Hugging Face's [license](https://spdx.org/licenses/CC-BY-NC-SA-3.0).
