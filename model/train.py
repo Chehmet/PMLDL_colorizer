@@ -17,14 +17,6 @@ from config.path_config import get_model_path, get_plots_path, get_main_config_p
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
 
-###---------------------------------------
-# 
-# TODO: rewrite models to avoid plagiarism
-# TODO: add comments and return types
-# TODO: get rid of unused imports and functions
-# TODO: fill the 
-###---------------------------------------
-
     config = get_config(get_main_config_path())
     
     epochs = config['epochs']
@@ -46,8 +38,8 @@ if __name__ == "__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
-    train_dataset = PictureDataset(mode='train', convert_to=convert_to, amount=pictures_num*(1-train_val_split))
-    val_dataset = PictureDataset(mode='val', convert_to=convert_to, amount=pictures_num*train_val_split)
+    train_dataset = PictureDataset(mode='train', convert_to=convert_to, amount=pictures_num*(1-train_val_split), image_size=pic_size)
+    val_dataset = PictureDataset(mode='val', convert_to=convert_to, amount=pictures_num*train_val_split, image_size=pic_size)
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 

@@ -16,7 +16,7 @@ from config.path_config import get_root_path
 
 
 class PictureDataset(Dataset):
-    def __init__(self, path=None, image_size=512, mode='train', convert_to='gray', amount=2000):
+    def __init__(self, path=None, image_size=1024, mode='train', convert_to='gray', amount=2000):
 
         # set the dataset's length
         amount = int(amount)
