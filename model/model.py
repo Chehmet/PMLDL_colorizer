@@ -1,8 +1,15 @@
-from data.transforms import rgb_to_gray
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.transforms import Normalize
+
+import sys
+import os
+# set project root to sys paths
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(project_root)
+from model.data.transforms import rgb_to_gray
+
 
 class CNN(torch.nn.Module):
     def __init__(self):

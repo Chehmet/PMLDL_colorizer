@@ -8,3 +8,4 @@ tqdm
 requests
 matplotlib
 scikit-image
+streamlit
