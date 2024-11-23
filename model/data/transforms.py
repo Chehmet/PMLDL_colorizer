@@ -38,4 +38,7 @@ def increase_color(image: np.ndarray, saturation: float) -> np.ndarray:
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     hsv[..., 1] = np.clip(hsv[..., 1] * saturation, 0, 255)
     enhanced_image = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+    if np.min(enhanced_image) < 0:
+        enhanced_image -= np.min(enhanced_image)
+        enhanced_image /= np.max(enhanced_image)
     return enhanced_image
