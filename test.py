@@ -27,7 +27,7 @@ def colorize_image_gan(image):
 resize_transform = transforms.Compose(
     [
         transforms.ToPILImage(),
-        transforms.Resize((1024, 1024)),
+        transforms.Resize((2048, 2048)),
         transforms.ToTensor(),
     ]
 )
@@ -52,7 +52,7 @@ model_gan.load_state_dict(
 
 model_gan.eval()
 
-url = get_urls()["url"][7]
+url = get_urls()["url"][1000]
 
 image = get_image(url)
 
