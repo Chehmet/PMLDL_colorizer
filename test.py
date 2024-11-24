@@ -2,6 +2,7 @@ from calendar import c
 from re import sub
 from model.data.functions import get_urls, get_image
 from model.data.transforms import rgb_to_gray, lab_to_rgb, rgb_to_lab, increase_color
+from config.path_config import get_root_path
 import torch
 from torchvision import transforms
 from model.model import CNN, Generator, Discriminator
@@ -98,4 +99,6 @@ subplots[1][1].imshow(increase_color(colored_GAN_from_original, 1.2))
 subplots[1][1].set_title("Colorized with GAN from original with color enhancement")
 subplots[1][2].imshow(increase_color(colored_GAN_from_CNN, 1.2))
 subplots[1][2].set_title("Colorized with GAN after CNN with color enhancement")
+filename = get_root_path + '/results/result.png'
+plt.savefig(filename)
 plt.show()

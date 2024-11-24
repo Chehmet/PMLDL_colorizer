@@ -1,5 +1,4 @@
 from torch.utils.data import Dataset
-from data.transforms import rgb_to_gray, rgb_to_lab
 from torch import max
 from torchvision import transforms
 import cv2
@@ -13,6 +12,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.append(project_root)
 
 from config.path_config import get_root_path
+from model.data.transforms import rgb_to_gray, rgb_to_lab
 
 
 class PictureDataset(Dataset):
