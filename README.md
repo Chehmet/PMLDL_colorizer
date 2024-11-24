@@ -38,9 +38,9 @@ project_root/
 
 ## Webpage
 Results of colorization on our webpage:
-![Web page](uploads/ex1_full.png)
+![Web page](results/ex1_full.png)
 Higher brightness
-![Web page](uploads/ex1_hb.png)
+![Web page](results/ex1_hb.png)
 
 ## Current Progress
 - We achieved notable results using a GAN-based approach, with the best model from epoch 22:
