@@ -6,18 +6,18 @@
 - **Saveliy Khlebnov**
 
 ## Project Overview
-This project focuses on building a robust model for colorizing black and white photos.
+We build two models CNN and GAN for colorizing black and white images.
 
 # Project Directory Structure
 
 ```plaintext
 project_root/
-├── .vscode/              # IDE-specific settings
-├── config/               # Configuration files
-├── model/                # Model training
+├── .vscode/              # IDE settings
+├── config/               
+├── model/                
 │   ├── data/             # Functions for dataset preprocessing and evaluation
 │   └── training/         # Scripts for training different model types
-├── models/               # Best model weights
+├── models/               # Model weights
 │   ├── cnn/              # Best CNN weights 
 │   └── gan/              # Best GAN weights 
 ├── plots/                # Training result visualizations
@@ -36,17 +36,18 @@ project_root/
 └── .gitattributes
 ```
 
+## Webpage
+Results of colorization on our webpage:
+![Web page](uploads/ex1_full.png)
+Higher brightness
+![Web page](uploads/ex1_hb.png)
 
 ## Current Progress
 - We achieved notable results using a GAN-based approach, with the best model from epoch 22:
 ![Best GAN Result](plots/gan/visual_progress_epoch_22.png)
 
-## Webpage
-Our web page:
-![Web page](results/WEBsite.png)
-
-Results of colorization:
-![Progress Example](results/WEBsiteGAN.jpg)
+## GAN model access
+We couldn't upload it to github due to file size limitations, so you can download our best gan model `best.pth` from [Google drive](https://drive.google.com/file/d/19awWsef7oDQxMFGN7_qN2Cd0pQE1E6Jl/view?usp=drive_link) for your use.
 
 ## Dataset
 We are utilizing the [Public Flickr Photos License 1 Dataset](https://huggingface.co/datasets/Chr0my/public_flickr_photos_license_1), containing **120 million colorful images**. These images are preprocessed into grayscale for training.
