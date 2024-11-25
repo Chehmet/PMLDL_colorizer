@@ -13,8 +13,8 @@ We build two models CNN and GAN for colorizing black and white images.
 ```plaintext
 project_root/
 ├── .vscode/              # IDE settings
-├── config/               
-├── model/                
+├── config/               # Configuration files      
+├── model/                # Source
 │   ├── data/             # Functions for dataset preprocessing and evaluation
 │   └── training/         # Scripts for training different model types
 ├── models/               # Model weights
@@ -30,7 +30,7 @@ project_root/
 ├── GAN_demo.ipynb        # GAN demo
 ├── CNN_demo.ipynb        # CNN demo
 ├── main.py               # Streamlit app
-├── test.py               # Test image generation and save to results/
+├── test.py               # Test image generation and save it to results/
 ├── README.md             
 ├── requirements.txt
 └── .gitattributes
@@ -59,3 +59,30 @@ We are utilizing the [Public Flickr Photos License 1 Dataset](https://huggingfac
 
 ## License
 The project is developed using Hugging Face's [license](https://spdx.org/licenses/CC-BY-NC-SA-3.0).
+
+## Getting Started
+
+Our project is already able to be run on your local machine.
+
+Clone the repository and run ``pip install -r requirements.txt`` to start working.
+
+### Web application
+
+To run the web page on your local machine:
+- Run the main.py from the root directory. GAN weights will be downloaded on the fly if you don't have it and CNN weights are in the models/cnn/ folder.
+
+> If you want the GAN model's weights, you can find them [here](https://drive.google.com/drive/folders/1xPMJcXidp2cRWRJ7m4eSJJ-9eYRgQTfp?usp=drive_link). Using them, you could train the models more and get better results. 
+
+### Model training from scratch
+
+If you would like to retrain models or adjust them and get a new one:
+- Fix the config/vars_config.json file: number of epochs, batch size, image resolution (pic_size), amount of pictures in your dataset, model type, and train_validation split;
+- Run the model/train.py. Plots and models will be downloaded to the plots/model_type/ and models/model_type/ folders;
+- **Kaggle** or **Google Colab** training. Refer to the [CNN_demo.ipynb](https://drive.google.com/file/d/1Fy1CdoJpW4A7p5jYlU7xdH8mqWX3ehU_/view?usp=drive_link) to see an example of train run on Kaggle. Refer to the [GAN_demo.ipynb](https://drive.google.com/file/d/1mPiweErrcQatwCdQrbDMiHiwYqcatWOH/view?usp=drive_link) to see an example of train run on Google Colab.
+
+### Dataset creation  for model training
+
+If you want to apply your own dataset:
+- Adjust variables in config/vars_config.json file (total images number, train_test split, and pic_size - resolution to which images will be resized);
+- Change the source from which images will be downloaded (model/data/functions.py get_urls() method);
+- Run the scripts/generate_datset.py. Pictures will be downloaded to the pictures/ folder: train part in the pictures/train/ and validation part in the pictures/val/.
