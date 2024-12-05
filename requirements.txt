@@ -9,3 +9,4 @@ requests
 matplotlib
 scikit-image
 streamlit
+gdown
