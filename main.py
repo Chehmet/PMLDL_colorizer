@@ -152,6 +152,5 @@ def display_upload_and_colorize_page():
                 colorized_gan = colorize_image_gan(np_image, brightness_factor)
                 st.session_state["colorized_gan"] = colorized_gan
 
-# Run the main display function
 if __name__ == '__main__':
     display_upload_and_colorize_page()
